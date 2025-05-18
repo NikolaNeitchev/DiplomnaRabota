@@ -1,4 +1,3 @@
-// middleware/auth.js - Middleware за удостоверяване на потребителите
 const jwt = require('jsonwebtoken');
 
 const authenticate = (req, res, next) => {
