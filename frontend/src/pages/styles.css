@@ -1,0 +1,114 @@
+/* SignIn Page Styles */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #ff4081;
+    --bg-gradient-start: #4c6ef5;
+    --bg-gradient-end: #7c4dff;
+    --btn-hover-color: #45a049;
+    --btn-active-color: #388e3c;
+    --btn-secondary-hover-color: #9c27b0;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to right, var(--bg-gradient-start), var(--bg-gradient-end));
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1.5rem;
+  }
+  
+  form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: var(--btn-hover-color);
+  }
+  
+  button:active {
+    background-color: var(--btn-active-color);
+  }
+  
+  .role-selection {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .role-selection h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .role-selection .role-btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    margin: 0.5rem;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .role-selection .consumer-btn {
+    background-color: var(--primary-color);
+  }
+  
+  .role-selection .freelancer-btn {
+    background-color: #7c4dff;
+  }
+  
+  .role-selection .consumer-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .role-selection .freelancer-btn:hover {
+    background-color: #9c27b0;
+  }
+  
