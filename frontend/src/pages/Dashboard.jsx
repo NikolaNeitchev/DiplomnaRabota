@@ -11,7 +11,7 @@ export function Dashboard() {
         // Assuming the user ID is stored in localStorage after login
         const userId = localStorage.getItem("userId");
 
-        const response = await fetch(`http://localhost:5000/api/services/${userId}`);
+        const response = await fetch(`http://localhost:5000/services/${userId}`);
         const data = await response.json();
 
         if (response.ok) {

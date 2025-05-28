@@ -9,9 +9,9 @@ export function ServiceForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const userId = 1; // Replace this with the actual user ID from the authentication context/session
+    const userId = 1;
     try {
-      const response = await fetch("http://localhost:5000/api/services", {
+      const response = await fetch("http://localhost:5000/routes/services", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

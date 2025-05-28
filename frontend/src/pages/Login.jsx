@@ -1,37 +1,47 @@
-// pages/Register.js - Регистрация за потребители
+// pages/Login.js - Вход за потребители
 import React, { useState } from 'react';
 
-function Register() {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/auth/register', {
+    const response = await fetch('http://localhost:5000/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     });
 
     const data = await response.json();
-    if (data.user) {
-      alert('Регистрацията е успешна! Влезте в системата.');
-      window.location.href = "/login";
+    if (response.ok && data.token) {
+      alert('Успешен вход!');
+      // Save token for authenticated requests
+      localStorage.setItem('token', data.token);
+      window.location.href = '/';
     } else {
-      alert('Грешка при регистрация.');
+      alert(data.error || 'Грешка при вход.');
     }
   };
 
   return (
-    <div>
-      <h1>Регистрация</h1>
-      <form onSubmit={handleRegister}>
-        <input type="text" placeholder="Потребителско име" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="password" placeholder="Парола" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Регистрация</button>
-      </form>
+    <div className="container mt-5">
+      <div className="card p-4 shadow-sm">
+        <h2 className="text-center">Вход</h2>
+        <form onSubmit={handleLogin}>
+          <div className="mb-3">
+            <label className="form-label">Потребителско име</label>
+            <input type="text" className="form-control" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Парола</label>
+            <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+          <button type="submit" className="btn btn-primary w-100">Вход</button>
+        </form>
+      </div>
     </div>
   );
 }
 
-export default Register;
+export default Login;

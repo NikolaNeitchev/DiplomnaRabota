@@ -14,7 +14,7 @@ function Checkout() {
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:5000/stripe/create-payment-intent', {
+    fetch('http://localhost:5000/routes/stripe/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify({ amount: 1000, currency: 'usd', orderId: id })
