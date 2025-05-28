@@ -1,18 +1,34 @@
-// models/Order.js - Модел за поръчки
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/database');
-const User = require('./User');
-const Service = require('./Service');
+const { client } = require('../config/database');
 
-const Order = sequelize.define('Order', {
-    id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
-    serviceId: { type: DataTypes.UUID, allowNull: false, references: { model: Service, key: 'id' } },
-    buyerId: { type: DataTypes.UUID, allowNull: false, references: { model: User, key: 'id' } },
-    status: { type: DataTypes.STRING, allowNull: false, defaultValue: 'pending' },
-    paymentIntent: { type: DataTypes.STRING, allowNull: false }
-});
+const Order = {
+  async create({ serviceId, buyerId, status, paymentIntent }) {
+    const result = await client.query(
+      'INSERT INTO "Orders" ("serviceId", "buyerId", status, "paymentIntent") VALUES ($1, $2, $3, $4) RETURNING *',
+      [serviceId, buyerId, status, paymentIntent]
+    );
+    return result.rows[0];
+  },
 
-Order.belongsTo(User, { foreignKey: 'buyerId' });
-Order.belongsTo(Service, { foreignKey: 'serviceId' });
+  async findAllByBuyer(buyerId) {
+    const result = await client.query(
+      `SELECT o.*, s.title AS service_title, s.price AS service_price, u.username AS buyer_username
+       FROM "Orders" o
+       JOIN "Services" s ON o."serviceId" = s.id
+       JOIN "Users" u ON o."buyerId" = u.id
+       WHERE o."buyerId" = $1`,
+      [buyerId]
+    );
+    return result.rows;
+  },
+
+  async updateStatus(orderId, status) {
+    const result = await client.query(
+      'UPDATE "Orders" SET status = $1 WHERE id = $2 RETURNING *',
+      [status, orderId]
+    );
+    return result.rows[0];
+  },
+
+};
 
 module.exports = Order;

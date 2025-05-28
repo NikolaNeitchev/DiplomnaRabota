@@ -1,11 +1,9 @@
-// routes/services.js - Управление на услуги
 const express = require('express');
-const { Service } = require('../models/Service');
+const Service = require('../models/Service');
 const { authenticate } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Създаване на нова услуга
 router.post('/', authenticate, async (req, res) => {
     try {
         const { title, description, price } = req.body;
@@ -16,7 +14,6 @@ router.post('/', authenticate, async (req, res) => {
     }
 });
 
-// Извличане на всички услуги
 router.get('/', async (req, res) => {
     try {
         const services = await Service.findAll();

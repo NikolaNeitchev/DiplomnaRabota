@@ -3,7 +3,6 @@ const Service = require("../models/Service");
 
 const router = express.Router();
 
-// Get all services
 router.get("/getservices", async (req, res) => {
   try {
     const services = await Service.findAll();

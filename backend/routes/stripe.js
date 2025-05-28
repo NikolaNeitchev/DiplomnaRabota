@@ -1,4 +1,4 @@
-// routes/stripe.js - Интеграция с Stripe
+require('dotenv').config();
 const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET);
 const { Order } = require('../models/Order');
