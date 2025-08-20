@@ -1,4 +1,3 @@
-// pages/Login.js - Вход за потребители
 import React, { useState } from 'react';
 
 function Login() {
